@@ -1,0 +1,11 @@
+{
+  "sysroot_src": "C:\\Users\\bergo\\.rustup\\toolchains\\stable-x86_64-pc-windows-msvc\\lib\\rustlib\\src\\rust\\library",
+  "crates": [
+    {
+      "root_module": "src\\main.rs",
+      "edition": "2021",
+      "deps": [],
+      "cfg": []
+    }
+  ]
+}
