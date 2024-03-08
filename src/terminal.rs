@@ -1,3 +1,4 @@
+use crate::Position;
 use std::io::{self, stdout, Write};
 use termion::event::Key;
 use termion::input::TermRead;
@@ -14,6 +15,11 @@ pub struct Terminal {
 }
 
 impl Terminal {
+    /// Set up a terminal with the appropriate size
+    ///
+    /// # Errors
+    ///
+    /// This function will return an error if .
     pub fn default() -> Result<Self, std::io::Error> {
         let size = termion::terminal_size()?;
         Ok(Self {
@@ -25,23 +31,40 @@ impl Terminal {
         })
     }
 
+    /// Returns a reference to the size of this [`Terminal`].
     pub fn size(&self) -> &Size {
         &self.size
     }
 
+    /// Clear  the terminal screen
     pub fn clear_screen() {
         print!("{}", termion::clear::All);
     }
 
-    pub fn cursor_position(x: u16, y: u16) {
-        let x = x.saturating_add(1);
-        let y = y.saturating_add(1);
+    /// Set cursor position
+    pub fn cursor_position(position: &Position) {
+        let Position { mut x, mut y } = position;
+        x = x.saturating_add(1);
+        y = y.saturating_add(1);
+        let x = x as u16;
+        let y = y as u16;
         print!("{}", termion::cursor::Goto(x, y));
     }
 
+    /// Flush stdout
+    ///
+    /// # Errors
+    ///
+    /// This function will return an error if .
     pub fn flush() -> Result<(), std::io::Error> {
         io::stdout().flush()
     }
+
+    /// Read a key from the standard input
+    ///
+    /// # Errors
+    ///
+    /// This function will return an error if .
     pub fn read_key() -> Result<Key, std::io::Error> {
         loop {
             if let Some(key) = io::stdin().lock().keys().next() {
@@ -50,14 +73,17 @@ impl Terminal {
         }
     }
 
+    /// Hides cursor from terminal
     pub fn cursor_hide() {
         print!("{}", termion::cursor::Hide);
     }
 
+    /// Displays cursor on terminal (after hiding)
     pub fn cursor_show() {
         print!("{}", termion::cursor::Show);
     }
 
+    /// Clear current line
     pub fn clear_current_line() {
         print!("{}", termion::clear::CurrentLine);
     }
