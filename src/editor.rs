@@ -135,8 +135,6 @@ impl Editor {
     }
 
     /// Processes a key pressed_key.
-    ///
-    /// For now it just handles the quit when ctrl-q is pressed
     fn process_keypress(&mut self) -> Result<(), std::io::Error> {
         let pressed_key = Terminal::read_key()?;
         match pressed_key {

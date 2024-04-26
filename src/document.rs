@@ -8,6 +8,7 @@ pub struct Document {
 }
 
 impl Document {
+    /// Opens a document
     pub fn open(filename: &str) -> Result<Self, std::io::Error> {
         let contents = fs::read_to_string(filename)?;
         let mut rows = Vec::new();
