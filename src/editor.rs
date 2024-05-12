@@ -138,7 +138,10 @@ impl Editor {
     fn process_keypress(&mut self) -> Result<(), std::io::Error> {
         let pressed_key = Terminal::read_key()?;
         match pressed_key {
-            Key::Ctrl('q') => self.should_quit = true,
+            Key::Ctrl(char) => match char {
+                'x' => self.should_quit = true,
+                _ => (),
+            },
             Key::Up
             | Key::Down
             | Key::Left
@@ -287,7 +290,7 @@ impl Editor {
     /// Default constructor
     pub fn default() -> Self {
         let args: Vec<String> = env::args().collect();
-        let mut initial_status = String::from("HELP: Ctrl-Q = quit");
+        let mut initial_status = String::from("HELP: Ctrl-x = quit");
 
         let document = if args.len() > 1 {
             let file_name = &args[1];
