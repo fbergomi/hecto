@@ -2,5 +2,20 @@
   "rust-analyzer.linkedProjects": [
     "./Cargo.toml"
   ],
-  "git.timeline.showAuthor": false
+  "git.timeline.showAuthor": false,
+  "files.exclude": {
+    "**/.git": true,
+    "**/.svn": true,
+    "**/.hg": true,
+    "**/CVS": true,
+    "**/.DS_Store": true,
+    "**/Thumbs.db": true,
+    "**/.trunk/*actions/": true,
+    "**/.trunk/*logs/": true,
+    "**/.trunk/*notifications/": true,
+    "**/.trunk/*out/": true,
+    "**/.trunk/*plugins/": true,
+    "**/*.unotation": true
+  },
+  "bigUML.hideUnotation": true
 }
